@@ -56,7 +56,7 @@ paths:
           description: OK
       operationId: get-accounting-entry-list
       description: returns all the entries in chronological order
-  '/accounting/account/detail/{accountId}':
+  '/accounting/account/{accountId}/detail':
     get:
       summary: Account detail
       tags: []
@@ -67,7 +67,7 @@ paths:
           description: OK
     parameters:
       - schema:
-          type: string
+          type: integer
         name: accountId
         in: path
         required: true
@@ -98,7 +98,7 @@ paths:
               properties: {}
     parameters:
       - schema:
-          type: number
+          type: integer
         name: accountId
         in: path
         description: account Id
@@ -135,7 +135,7 @@ paths:
               $ref: '#/components/schemas/EntryInput'
     parameters:
       - schema:
-          type: number
+          type: integer
         name: entryId
         in: path
         required: true
