@@ -10,19 +10,24 @@ info:
 servers:
   - url: 'https://api.digis.io'
 paths:
-  '/accounting/account/:date/listUntil':
+  '/accounting/account/{date}/listUntil':
     get:
-      summary: List of accounting entries until xxx-xx-xx
+      summary: Entry list for a selected account until xxx-xx-xx
       tags: []
       responses:
         '200':
           description: OK
       operationId: get-accounting-account-2018-12-31-listUntil
       description: 'same as `/account/list` but returns only until a given date. The date parameter is in the url and must be given in the ISO standard, e.g. 2019-10-30'
-    parameters: []
+    parameters:
+      - schema:
+          type: string
+        name: date
+        in: path
+        required: true
   /accounting/account/list:
     get:
-      summary: List of accounting entries
+      summary: Account list
       tags: []
       responses:
         '200':
@@ -44,7 +49,7 @@ paths:
               properties: {}
   /accounting/entry/list:
     get:
-      summary: list of entries
+      summary: Entry list
       tags: []
       responses:
         '200':
@@ -68,7 +73,7 @@ paths:
         required: true
   '/accounting/entry/{accountId}/list':
     get:
-      summary: List of accounting entries for a selected account
+      summary: Entry list for a selected account
       tags: []
       responses:
         '200':
@@ -97,6 +102,73 @@ paths:
         name: accountId
         in: path
         description: account Id
+        required: true
+  /accounting/entry/insert:
+    post:
+      summary: Entry insert
+      operationId: post-accounting-entry-insert
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      description: Creates a new entry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntryInput'
+  '/accounting/entry/{entryId}/update':
+    post:
+      summary: Entry Update
+      operationId: post-accounting-entry-930-update
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntryInput'
+    parameters:
+      - schema:
+          type: number
+        name: entryId
+        in: path
+        required: true
+  /accounting/account/insert:
+    post:
+      summary: ''
+      operationId: post-accounting-account-insert
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountInput'
+  '/accounting/account/{accountId}/update':
+    post:
+      summary: ''
+      operationId: post-accounting-account-update
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountInput'
+        description: ''
+    parameters:
+      - schema:
+          type: integer
+        name: accountId
+        in: path
         required: true
 components:
   schemas:
@@ -155,6 +227,50 @@ components:
         entity:
           type: object
         '':
+          type: string
+    EntryInput:
+      title: EntryInput
+      type: object
+      properties:
+        date:
+          type: string
+        credit:
+          type: array
+          items:
+            type: object
+            properties:
+              amount:
+                type: number
+              accountId:
+                type: integer
+        debit:
+          type: array
+          items:
+            type: object
+            properties:
+              amount:
+                type: number
+              accountId:
+                type: integer
+        name:
+          type: string
+    AccountInput:
+      title: AccountInput
+      type: object
+      properties:
+        currency:
+          type: object
+          properties:
+            id:
+              type: number
+        accountType:
+          type: object
+          properties:
+            id:
+              type: number
+        name:
+          type: string
+        number:
           type: string
   securitySchemes:
     Authorization:
