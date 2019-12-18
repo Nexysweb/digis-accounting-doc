@@ -1,0 +1,70 @@
+openapi: 3.0.0
+info:
+  title: Accounting
+  version: '1.0'
+  contact:
+    name: Johan Boissard
+    email: johan@nexys.ch
+    url: 'https://nexys.ch'
+  description: This API connects to the accounting module of Digis
+servers:
+  - url: 'https://api.digis.io'
+  - url: ''
+    description: ''
+paths:
+  /accounting/account/list:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-accounting-account-list
+      description: get the list of accounts and their balance
+  '/accounting/account/:date/listUntil':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+      operationId: get-accounting-account-2018-12-31-listUntil
+      description: 'same as `/account/list` but returns only until a given date. The date parameter is in the url and must be given in the ISO standard, e.g. 2019-10-30'
+    parameters: []
+  '/accounting/account/{accountId}/detail':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: 'get-accounting-account-:accountId-detail'
+      description: lists the details of a chosen account. The id is always numerical.
+    parameters:
+      - schema:
+          type: number
+        name: accountId
+        in: path
+        required: true
+        description: id of the account
+  '/accounting/entry/{accountId}/list':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: 'get-accounting-entry-:accountId-list'
+      description: list of entries for the selected account.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    parameters:
+      - schema:
+          type: number
+        name: accountId
+        in: path
+        description: account Id
+        required: true
+components:
+  schemas: {}
+  securitySchemes:
+    Authorization:
+      type: oauth2
