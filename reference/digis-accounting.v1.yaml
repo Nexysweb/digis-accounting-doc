@@ -16,12 +16,24 @@ paths:
     get:
       summary: List of accounting entries for a selected account
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Entry'
       operationId: 'get-accounting-entry-:accountId-list'
       description: list of entries for the selected account.
       requestBody:
         content:
           application/json:
+            schema:
+              type: object
+              properties: {}
+          application/xml:
             schema:
               type: object
               properties: {}
@@ -60,9 +72,24 @@ paths:
     get:
       summary: List of accounting entries
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+              examples: {}
       operationId: get-accounting-account-list
       description: get the list of accounts and their balance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
 components:
   schemas:
     Account:
