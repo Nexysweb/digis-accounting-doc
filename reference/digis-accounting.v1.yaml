@@ -9,55 +9,7 @@ info:
     url: 'https://nexys.ch'
 servers:
   - url: 'https://api.digis.io'
-  - url: ''
-    description: ''
 paths:
-  '/accounting/entry/{accountId}/list':
-    get:
-      summary: List of accounting entries for a selected account
-      tags: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Entry'
-      operationId: 'get-accounting-entry-:accountId-list'
-      description: list of entries for the selected account.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-          application/xml:
-            schema:
-              type: object
-              properties: {}
-    parameters:
-      - schema:
-          type: number
-        name: accountId
-        in: path
-        description: account Id
-        required: true
-  '/accounting/account/{accountId}/detail':
-    get:
-      summary: Account detail
-      tags: []
-      responses: {}
-      operationId: 'get-accounting-account-:accountId-detail'
-      description: lists the details of a chosen account. The id is always numerical.
-    parameters:
-      - schema:
-          type: number
-        name: accountId
-        in: path
-        required: true
-        description: id of the account
   '/accounting/account/:date/listUntil':
     get:
       summary: List of accounting entries until xxx-xx-xx
@@ -90,6 +42,62 @@ paths:
             schema:
               type: object
               properties: {}
+  /accounting/entry/list:
+    get:
+      summary: list of entries
+      tags: []
+      responses:
+        '200':
+          description: OK
+      operationId: get-accounting-entry-list
+      description: returns all the entries in chronological order
+  '/accounting/account/detail/{accountId}':
+    get:
+      summary: Account detail
+      tags: []
+      operationId: 'get-accounting-account-:accountId-detail'
+      description: lists the details of a chosen account. The id is always numerical.
+      responses:
+        '200':
+          description: OK
+    parameters:
+      - schema:
+          type: string
+        name: accountId
+        in: path
+        required: true
+  '/accounting/entry/{accountId}/list':
+    get:
+      summary: List of accounting entries for a selected account
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Entry'
+      operationId: 'get-accounting-entry-:accountId-list'
+      description: list of entries for the selected account.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+    parameters:
+      - schema:
+          type: number
+        name: accountId
+        in: path
+        description: account Id
+        required: true
 components:
   schemas:
     Account:
@@ -143,6 +151,7 @@ components:
           type: number
         csum:
           type: number
+          description: the amount in the parent account until this transaction
         entity:
           type: object
         '':
@@ -150,3 +159,9 @@ components:
   securitySchemes:
     Authorization:
       type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: ''
+          tokenUrl: ''
+          refreshUrl: ''
+          scopes: {}
