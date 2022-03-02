@@ -557,6 +557,121 @@ paths:
       description: Upload a new file
       tags:
         - file
+  /mail/insert:
+    post:
+      summary: Mail Insert
+      operationId: post-mail-insert
+      responses:
+        '200':
+          description: OK
+      tags:
+        - mail
+      description: Insert a new mail item
+  /mail/list:
+    post:
+      summary: Mail List
+      tags:
+        - mail
+      operationId: get-mail-list
+      description: list of mails
+      responses:
+        '200':
+          description: OK
+  /mail/archive:
+    post:
+      summary: Mail Archive
+      operationId: post-mail-archive
+      responses:
+        '200':
+          description: OK
+      description: Set mail to archive and link entities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company:
+                  type: object
+                  required:
+                    - uuid
+                  properties:
+                    uuid:
+                      type: string
+              required:
+                - company
+      tags:
+        - mail
+  /mail/toPayable:
+    post:
+      summary: Mail to Payable
+      operationId: post-mail-toPayable
+      responses:
+        '200':
+          description: OK
+      description: moves mail to "processed" and create payable (and execute payment)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company:
+                  type: object
+                  required:
+                    - uuid
+                    - paymentProfile
+                  properties:
+                    uuid:
+                      type: string
+                    paymentProfile:
+                      type: object
+                      required:
+                        - iban
+                      properties:
+                        iban:
+                          type: string
+                          description: 'iban of the payment, this can either be a qr iban or regular'
+                        bic:
+                          type: string
+                        referenceNumber:
+                          type: string
+                bankAccount:
+                  type: object
+                  required:
+                    - uuid
+                  properties:
+                    uuid:
+                      type: string
+              required:
+                - company
+                - bankAccount
+      tags:
+        - mail
+  /mail/statusChange:
+    post:
+      summary: Mail Status Change
+      operationId: post-mail-statusChange
+      responses:
+        '200':
+          description: OK
+      description: Change the status of a mail. Beware not all possibilities are possible since there are business rules that will prevent some actions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uuid:
+                  type: string
+                  description: uuid of the mail
+                status:
+                  type: integer
+              required:
+                - uuid
+                - status
+      tags:
+        - mail
 components:
   schemas:
     Account:
