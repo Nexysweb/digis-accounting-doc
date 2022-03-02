@@ -105,6 +105,8 @@ paths:
         required: true
   /accounting/entry/insert:
     post:
+      tags:
+        - accounting
       summary: Entry insert
       operationId: post-accounting-entry-insert
       responses:
@@ -123,6 +125,9 @@ paths:
               $ref: '#/components/schemas/EntryInput'
   '/accounting/entry/{entryId}/update':
     post:
+      tags:
+        - accounting
+      description: Updates an existing entry
       summary: Entry Update
       operationId: post-accounting-entry-930-update
       responses:
@@ -141,6 +146,9 @@ paths:
         required: true
   /accounting/account/insert:
     post:
+      tags:
+        - accounting
+      description: add a new account
       summary: ''
       operationId: post-accounting-account-insert
       responses:
@@ -153,7 +161,9 @@ paths:
               $ref: '#/components/schemas/AccountInput'
   '/accounting/account/{accountId}/update':
     post:
-      summary: ''
+      description: updates an account
+      tags:
+        - accounting
       operationId: post-accounting-account-update
       responses:
         '200':
@@ -170,6 +180,17 @@ paths:
         name: accountId
         in: path
         required: true
+  /company/list:
+    post:
+      description: fetches list of companies
+      tags:
+        - company
+        - accounting
+      summary: get list of companies
+      operationId: post-company-list
+      responses:
+        '200':
+          description: OK
 components:
   schemas:
     Account:
@@ -281,3 +302,6 @@ components:
           tokenUrl: ''
           refreshUrl: ''
           scopes: {}
+tags:
+  - name: accounting
+  - name: company
