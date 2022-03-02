@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
-  title: Accounting
+  title: Admin as a Service (AaaS)
   version: '1.0'
-  description: This API connects to the accounting module of Digis
+  description: This API connects to the accounting module of Digis. Provides all admin backend from incoming assets to accounting
   contact:
     name: Johan Boissard
     email: johan@nexys.ch
@@ -13,7 +13,7 @@ paths:
   '/accounting/account/{date}/listUntil':
     post:
       summary: Entry list for a selected account until xxx-xx-xx
-      tags: 
+      tags:
         - accounting
       responses:
         '200':
@@ -29,7 +29,7 @@ paths:
   /accounting/account/list:
     post:
       summary: Account list
-      tags: 
+      tags:
         - accounting
       responses:
         '200':
@@ -477,6 +477,66 @@ paths:
         $ref: '#/components/requestBodies/Uuid'
       tags:
         - invoice
+  /payment-profile/list:
+    post:
+      summary: Payment Profile list
+      operationId: post-payment-profile-list
+      responses:
+        '200':
+          description: OK
+      description: Payment Profile list
+      tags:
+        - payment profile
+      requestBody:
+        $ref: '#/components/requestBodies/Uuid'
+  /payment-profile/detail:
+    post:
+      summary: Payment Profile detail
+      operationId: post-payment-profile-detail
+      responses:
+        '200':
+          description: OK
+      description: Payment Profile detail
+      tags:
+        - payment profile
+      requestBody:
+        $ref: '#/components/requestBodies/Uuid'
+  /payment-profile/insert:
+    post:
+      summary: Payment Profile insert
+      operationId: post-payment-profile-insert
+      responses:
+        '200':
+          description: OK
+      description: Payment Profile insert
+      tags:
+        - payment profile
+      requestBody:
+        $ref: '#/components/requestBodies/Payment-Profile'
+  /payment-profile/archive:
+    post:
+      summary: Payment Profile archive
+      operationId: post-payment-archive-delete
+      responses:
+        '200':
+          description: OK
+      description: Payment Profile archive
+      tags:
+        - payment profile
+      requestBody:
+        $ref: '#/components/requestBodies/Uuid'
+  /payment-profile/delete:
+    post:
+      summary: Payment Profile delete
+      operationId: post-payment-profile-delete
+      responses:
+        '200':
+          description: OK
+      description: Payment Profile delete
+      tags:
+        - payment profile
+      requestBody:
+        $ref: '#/components/requestBodies/Uuid'
 components:
   schemas:
     Account:
@@ -657,9 +717,36 @@ components:
               - vat
               - address
       description: invoice insert
+    Payment-Profile:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              type:
+                type: number
+              company:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+                required:
+                  - uuid
+              account:
+                type: object
+                properties:
+                  id:
+                    type: number
+                required:
+                  - id
+              referenceNumber:
+                type: string
+            required:
+              - type
   parameters: {}
 tags:
   - name: accounting
   - name: invoice
   - name: file
   - name: company
+  - name: payment profile
