@@ -384,7 +384,7 @@ paths:
       operationId: post-invoice-detail
       responses:
         '200':
-          description: OK
+          $ref: '#/components/responses/Invoice'
       requestBody:
         $ref: '#/components/requestBodies/Uuid'
   /invoice/update:
@@ -537,6 +537,26 @@ paths:
         - payment profile
       requestBody:
         $ref: '#/components/requestBodies/Uuid'
+  /file/serve:
+    post:
+      summary: File Serve
+      operationId: post-file-serve
+      responses:
+        '200':
+          description: OK
+      description: Serve file
+      tags:
+        - file
+  /file/upload:
+    post:
+      summary: File Upload
+      operationId: post-file-upload
+      responses:
+        '200':
+          description: OK
+      description: Upload a new file
+      tags:
+        - file
 components:
   schemas:
     Account:
@@ -564,8 +584,6 @@ components:
           type: number
         nTransactions:
           type: integer
-        '':
-          type: string
     Entry:
       title: Entry
       type: object
@@ -593,8 +611,6 @@ components:
           description: the amount in the parent account until this transaction
         entity:
           type: object
-        '':
-          type: string
     EntryInput:
       title: EntryInput
       type: object
@@ -744,9 +760,22 @@ components:
             required:
               - type
   parameters: {}
+  responses:
+    Invoice:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              amount:
+                type: number
 tags:
   - name: accounting
   - name: invoice
   - name: file
   - name: company
   - name: payment profile
+  - name: mail
