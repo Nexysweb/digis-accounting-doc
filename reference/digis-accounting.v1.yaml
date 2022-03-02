@@ -11,9 +11,10 @@ servers:
   - url: 'https://api.digis.io'
 paths:
   '/accounting/account/{date}/listUntil':
-    get:
+    post:
       summary: Entry list for a selected account until xxx-xx-xx
-      tags: []
+      tags: 
+        - accounting
       responses:
         '200':
           description: OK
@@ -26,9 +27,10 @@ paths:
         in: path
         required: true
   /accounting/account/list:
-    get:
+    post:
       summary: Account list
-      tags: []
+      tags: 
+        - accounting
       responses:
         '200':
           description: OK
@@ -48,18 +50,20 @@ paths:
               type: object
               properties: {}
   /accounting/entry/list:
-    get:
+    post:
       summary: Entry list
-      tags: []
+      tags:
+        - accounting
       responses:
         '200':
           description: OK
       operationId: get-accounting-entry-list
       description: returns all the entries in chronological order
   '/accounting/account/{accountId}/detail':
-    get:
+    post:
       summary: Account detail
-      tags: []
+      tags:
+        - accounting
       operationId: 'get-accounting-account-:accountId-detail'
       description: lists the details of a chosen account. The id is always numerical.
       responses:
@@ -72,9 +76,10 @@ paths:
         in: path
         required: true
   '/accounting/entry/{accountId}/list':
-    get:
+    post:
       summary: Entry list for a selected account
-      tags: []
+      tags:
+        - accounting
       responses:
         '200':
           description: OK
