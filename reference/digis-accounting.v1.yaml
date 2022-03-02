@@ -233,10 +233,9 @@ paths:
                     - name
                   properties:
                     name:
-                      type: string     
+                      type: string
               required:
                 - data
-    
   /company/update:
     post:
       description: update company
@@ -286,6 +285,113 @@ paths:
               required:
                 - data
                 - uuid
+  /company/address/list:
+    post:
+      description: fetches list of address for a company
+      tags:
+        - company
+      summary: get list of companty addresses
+      operationId: company-address-list
+      responses:
+        '200':
+          description: OK
+  /company/address/detail:
+    post:
+      description: list company address
+      tags:
+        - company
+      summary: get company
+      operationId: get-company-address
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        $ref: '#/components/requestBodies/Uuid'
+  /company/address/insert:
+    post:
+      description: insert company address
+      tags:
+        - company
+      summary: insert company address
+      operationId: insert-company-address
+      responses:
+        '200':
+          description: OK
+      x-internal: false
+      requestBody:
+        $ref: '#/components/requestBodies/Address'
+  /company/address/update:
+    post:
+      description: update company address
+      tags:
+        - company
+      summary: update company address
+      operationId: update-company-address
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  required:
+                    - name
+                  properties:
+                    name:
+                      type: string
+                uuid:
+                  type: string
+              required:
+                - data
+                - uuid
+  /company/address/delete:
+    post:
+      description: delete company address
+      tags:
+        - company
+      summary: delete company address
+      operationId: delete-company-address
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        $ref: '#/components/requestBodies/Uuid'
+  /invoice/list:
+    post:
+      summary: List of invoices
+      operationId: post-invoice-list
+      responses:
+        '200':
+          description: OK
+  /invoice/detail:
+    post:
+      summary: Invoice detail
+      operationId: post-invoice-detail
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        $ref: '#/components/requestBodies/Uuid'
+  /invoice/update:
+    post:
+      summary: Update invoice
+      operationId: post-invoice-update
+      responses:
+        '200':
+          description: OK
+  /invoice/delete:
+    post:
+      summary: Delete invoice
+      operationId: post-invoice-delete
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        $ref: '#/components/requestBodies/Uuid'
 components:
   schemas:
     Account:
@@ -397,6 +503,76 @@ components:
           tokenUrl: ''
           refreshUrl: ''
           scopes: {}
+  requestBodies:
+    Address:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              street:
+                type: string
+              city:
+                type: string
+              zip:
+                type: string
+              country:
+                type: string
+      description: ''
+    Uuid:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              uuid:
+                type: string
+                description: UUID
+            required:
+              - uuid
+      description: filter by UUID
+    Invoice:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              company:
+                type: object
+                required:
+                  - uuid
+                  - name
+                properties:
+                  uuid:
+                    type: string
+                  name:
+                    type: string
+              vat:
+                type: number
+              address:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  body:
+                    type: object
+                    properties:
+                      street:
+                        type: string
+                      zip:
+                        type: string
+                      city:
+                        type: string
+                    required:
+                      - street
+                      - zip
+                      - city
+            required:
+              - company
+              - vat
+              - address
+      description: invoice insert
+  parameters: {}
 tags:
   - name: accounting
   - name: company
