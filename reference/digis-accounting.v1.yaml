@@ -362,14 +362,20 @@ paths:
         $ref: '#/components/requestBodies/Uuid'
   /invoice/list:
     post:
-      summary: List of invoices
+      tags:
+        - invoice
+      description: list of invoices
+      summary: Invoices List
       operationId: post-invoice-list
       responses:
         '200':
           description: OK
   /invoice/detail:
     post:
+      tags:
+        - invoice
       summary: Invoice detail
+      description: invoice detail
       operationId: post-invoice-detail
       responses:
         '200':
@@ -378,20 +384,94 @@ paths:
         $ref: '#/components/requestBodies/Uuid'
   /invoice/update:
     post:
+      tags:
+        - invoice
       summary: Update invoice
+      description: update invoice
       operationId: post-invoice-update
       responses:
         '200':
           description: OK
   /invoice/delete:
     post:
-      summary: Delete invoice
+      tags:
+        - invoice
+      summary: Invoice Delete
+      description: delete invoice
       operationId: post-invoice-delete
       responses:
         '200':
           description: OK
       requestBody:
         $ref: '#/components/requestBodies/Uuid'
+  /invoice/insert:
+    post:
+      tags:
+        - invoice
+      summary: Invoice insert
+      description: insert invoice
+      operationId: post-invoice-insert
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        $ref: '#/components/requestBodies/Invoice'
+  /invoice/item/list:
+    post:
+      summary: Invoice item list
+      operationId: post-invoice-item-list
+      responses:
+        '200':
+          description: OK
+      description: invoice item list
+      requestBody:
+        $ref: '#/components/requestBodies/Uuid'
+      tags:
+        - invoice
+  /invoice/item/detail:
+    post:
+      summary: Invoice item detail
+      operationId: post-invoice-item-detail
+      responses:
+        '200':
+          description: OK
+      description: Invoive item detail
+      requestBody:
+        $ref: '#/components/requestBodies/Uuid'
+      tags:
+        - invoice
+  /invoice/item/insert:
+    post:
+      description: invoice item insert
+      summary: Invoice item insert
+      operationId: post-invoice-item-insert
+      responses:
+        '200':
+          description: OK
+      tags:
+        - invoice
+  /invoice/item/update:
+    post:
+      summary: Invoice item update
+      operationId: post-invoice-item-update
+      responses:
+        '200':
+          description: OK
+      description: Invoice item update
+      tags:
+        - invoice
+  /invoice/item/delete:
+    post:
+      summary: Invoice item delete
+      operationId: post-invoice-item-delete
+      responses:
+        '200':
+          description: OK
+      description: Invoice item delete
+      requestBody:
+        $ref: '#/components/requestBodies/Uuid'
+      tags:
+        - invoice
 components:
   schemas:
     Account:
@@ -575,4 +655,6 @@ components:
   parameters: {}
 tags:
   - name: accounting
+  - name: invoice
+  - name: file
   - name: company
