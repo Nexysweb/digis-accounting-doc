@@ -191,6 +191,101 @@ paths:
       responses:
         '200':
           description: OK
+  /company/detail:
+    post:
+      description: fetches list of companies
+      tags:
+        - company
+      summary: get company
+      operationId: get-company
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uuid:
+                  type: string
+              required:
+                - uuid
+  /company/insert:
+    post:
+      description: insert company
+      tags:
+        - company
+      summary: insert company
+      operationId: insert-company
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  required:
+                    - name
+                  properties:
+                    name:
+                      type: string     
+              required:
+                - data
+    
+  /company/update:
+    post:
+      description: update company
+      tags:
+        - company
+      summary: update company
+      operationId: update-company
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  required:
+                    - name
+                  properties:
+                    name:
+                      type: string
+                uuid:
+                  type: string
+              required:
+                - data
+                - uuid
+  /company/delete:
+    post:
+      description: delete company
+      tags:
+        - company
+      summary: delete company
+      operationId: delete-company
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uuid:
+                  type: string
+              required:
+                - data
+                - uuid
 components:
   schemas:
     Account:
