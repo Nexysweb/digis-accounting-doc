@@ -672,6 +672,144 @@ paths:
                 - status
       tags:
         - mail
+  /auth/login:
+    post:
+      summary: Login
+      operationId: post-auth-login
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                instance:
+                  type: object
+                  required:
+                    - uuid
+                  properties:
+                    uuid:
+                      type: string
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+                - instance
+                - username
+                - password
+        description: 'login via username and password: should favor oauth'
+      tags:
+        - auth
+      description: login user the standard way
+  /auth/signup:
+    post:
+      summary: Signup
+      operationId: post-auth-signup
+      responses:
+        '200':
+          description: OK
+      description: |-
+        User signup
+        Note: this is a standard signup, oauth/sso should be favored
+      tags:
+        - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                instance:
+                  type: object
+                  required:
+                    - name
+                    - uuid
+                  properties:
+                    name:
+                      type: string
+                    uuid:
+                      type: string
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+                - instance
+                - username
+                - password
+  /user/invite:
+    post:
+      summary: User Invite
+      operationId: post-user-invite
+      responses:
+        '200':
+          description: OK
+      description: Invite a new user to the instance
+      tags:
+        - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                permissions:
+                  type: array
+                  description: pass the list of permissions the new user is granted with
+                  items:
+                    type: integer
+              required:
+                - email
+                - permissions
+  /user/invitation/accept:
+    post:
+      tags:
+        - auth
+      summary: User Invitation Accept
+      operationId: post-user-invitation-accept
+      responses:
+        '200':
+          description: OK
+      description: when new user signs up via invitation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+                user:
+                  type: object
+                  properties:
+                    uuid:
+                      type: string
+                '':
+                  type: string
+  /user/list:
+    post:
+      tags:
+        - auth
+      summary: User list
+      operationId: post-user-list
+      responses:
+        '200':
+          description: OK
+      description: List of user
+  /auth/logout:
+    get:
+      summary: logout
+      tags: []
+      responses:
+        '200':
+          description: OK
+      operationId: get-auth-logout
+      description: 'log out user, and revoke token'
 components:
   schemas:
     Account:
@@ -888,6 +1026,8 @@ components:
               amount:
                 type: number
 tags:
+  - name: user
+  - name: auth
   - name: accounting
   - name: invoice
   - name: file
