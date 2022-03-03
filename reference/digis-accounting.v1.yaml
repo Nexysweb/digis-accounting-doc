@@ -804,7 +804,8 @@ paths:
   /auth/logout:
     get:
       summary: logout
-      tags: []
+      tags: 
+        - auth
       responses:
         '200':
           description: OK
