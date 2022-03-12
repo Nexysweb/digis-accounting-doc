@@ -305,7 +305,7 @@ paths:
       description: list company address
       tags:
         - company
-      summary: get company
+      summary: get company address
       operationId: get-company-address
       responses:
         '200':
@@ -804,7 +804,7 @@ paths:
   /auth/logout:
     get:
       summary: logout
-      tags: 
+      tags:
         - auth
       responses:
         '200':
