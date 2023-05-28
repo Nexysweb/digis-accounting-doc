@@ -1078,9 +1078,13 @@ components:
       content:
         application/json:
           schema:
+            type: object
             properties:
               id:
-                type: string
+                type: integer
+            x-examples:
+              Example 1:
+                id: 449
         application/xml:
           schema:
             type: object
