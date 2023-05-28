@@ -589,6 +589,8 @@ paths:
                   lang: EN
                   onlyReceipt: false
       description: get PDF of selected invoice
+      tags:
+        - invoice
   /payment-profile/list:
     post:
       summary: Payment Profile list
@@ -1042,7 +1044,7 @@ components:
                 description: UUID
             required:
               - uuid
-      description: filter by UUID    
+      description: filter by UUID
     Payment-Profile:
       content:
         application/json:
