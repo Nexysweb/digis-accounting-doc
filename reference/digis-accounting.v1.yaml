@@ -1152,6 +1152,69 @@ paths:
           description: OK
       operationId: get-auth-logout
       description: 'log out user, and revoke token'
+  /invoice/status/change:
+    post:
+      summary: Invoice status change
+      operationId: post-invoice-status-change
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    update:
+                      success: true
+                      updated: 1
+                    entry:
+                      id: 3125
+                properties:
+                  update:
+                    type: object
+                    required:
+                      - success
+                      - updated
+                    properties:
+                      success:
+                        type: boolean
+                      updated:
+                        type: integer
+                  entry:
+                    type: object
+                    required:
+                      - id
+                    properties:
+                      id:
+                        type: integer
+                required:
+                  - update
+                  - entry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  uuid: 043bfdd4-fd45-11ed-82d4-42010aac0013
+                  status: 2
+              properties:
+                uuid:
+                  type: string
+                status:
+                  type: integer
+                  description: '1: pending, 2: sent, 3: paid'
+              required:
+                - uuid
+                - status
+        description: pass uuid and new status
+      tags:
+        - invoice
+      description: 'changes the status of an invoice'
+      security:
+        - Authorization: []
 components:
   schemas:
     Account:
