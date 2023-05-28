@@ -221,7 +221,7 @@ paths:
       description: insert company
       tags:
         - company
-      summary: insert company
+      summary: Insert a company
       operationId: insert-company
       responses:
         '200':
@@ -241,6 +241,11 @@ paths:
                       type: string
               required:
                 - data
+            examples:
+              Example 1:
+                value:
+                  data:
+                    name: my company
   /company/update:
     post:
       description: update company
