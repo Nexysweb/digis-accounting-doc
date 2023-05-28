@@ -221,14 +221,14 @@ paths:
                 - uuid
   /company/insert:
     post:
-      description: insert company
+      description: insert a company
       tags:
         - company
       summary: Insert a company
       operationId: insert-company
       responses:
         '200':
-          description: OK
+          $ref: '#/components/responses/Uuid'
       requestBody:
         content:
           application/json:
@@ -249,6 +249,8 @@ paths:
                 value:
                   data:
                     name: my company
+      security:
+        - Authorization: []
   /company/update:
     post:
       description: update company
@@ -1100,6 +1102,22 @@ components:
             x-examples:
               Example 1:
                 id: 449
+    Uuid:
+      description: Uuid of created object
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              uuid:
+                type: string
+            x-examples:
+              Example 1:
+                uuid: 1521d11d-fd45-11ed-82d4-42010aac0013
+          examples:
+            Example 1:
+              value:
+                uuid: 1521d11d-fd45-11ed-82d4-42010aac0013
 tags:
   - name: user
   - name: auth
