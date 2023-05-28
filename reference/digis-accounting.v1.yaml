@@ -7,8 +7,11 @@ info:
     name: Johan Boissard
     email: johan@nexys.ch
     url: 'https://nexys.ch'
+  license:
+    name: MIT
+    url: 'https://opensource.org/license/mit/'
 servers:
-  - url: 'https://api.digis.io'
+  - url: 'https://app.digis.ch/api'
 paths:
   '/accounting/account/{date}/listUntil':
     post:
@@ -371,6 +374,9 @@ paths:
                       id: 1
                     company:
                       uuid: 1521d11d-fd45-11ed-82d4-42010aac0013
+      security:
+        - Authorization: []
+      parameters: []
     parameters: []
   /company/address/update:
     post:
@@ -1104,3 +1110,5 @@ tags:
   - name: payment profile
   - name: mail
   - name: address
+security:
+  - Authorization: []
