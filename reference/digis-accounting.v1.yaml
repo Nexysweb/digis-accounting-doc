@@ -438,11 +438,232 @@ paths:
       tags:
         - invoice
       summary: Invoice detail
-      description: invoice detail
+      description: returns invoice detail
       operationId: post-invoice-detail
       responses:
         '200':
-          $ref: '#/components/responses/Invoice'
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    items:
+                      - id: 696
+                        name: fghj
+                        description: null
+                        amount: 17
+                        price: 122
+                        discount: null
+                        discountAbs: null
+                        currency: 1
+                        fxRate: 0
+                        logDateAdded: '2023-05-28T11:14:21.000Z'
+                        invoice:
+                          uuid: 155cd780-fd45-11ed-82d4-42010aac0013
+                        project: null
+                    totalWVat: 2233.7
+                    total: 2074
+                    subtotal: 2074
+                    uuid: 155cd780-fd45-11ed-82d4-42010aac0013
+                    currency: 1
+                    sender: |-
+                      Alphagrain AG
+                      Rigistrasse 2
+                      6300 Zug
+                      Switzerland
+                    key: Y9yQwVzBGI9bTW7wydn0zA==
+                    statusId: 1
+                    refNumberInt: 1822
+                    langId: 1
+                    additionalInformation: '-'
+                    date: '2023-05-28T10:47:47.000Z'
+                    dateDue: '2023-06-27T00:00:00.000Z'
+                    logDateAdded: '2023-05-28T10:47:47.000Z'
+                    vat: 0.077
+                    vatIncluded: null
+                    discount: null
+                    discountAbs: null
+                    paymentUrl: null
+                    instance:
+                      uuid: c58b8894-2cfd-11ed-8130-42010aac000a
+                    address:
+                      id: 449
+                      street: sdf
+                      zip: '123'
+                      city: sdf
+                      company:
+                        uuid: 1521d11d-fd45-11ed-82d4-42010aac0013
+                        name: testest
+                    project: null
+                    paymentProfile:
+                      id: 574
+                      type: 2
+                      iban: CH6130767000R55483324
+                      bankingReferenceNumber: null
+                      account:
+                        id: 4987
+                        number: 2000
+                        name: Payable
+                    productAccount:
+                      id: 4987
+                      name: Payable
+                      number: 2000
+                    id: 155cd780-fd45-11ed-82d4-42010aac0013
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        description:
+                          nullable: true
+                        amount:
+                          type: integer
+                        price:
+                          type: integer
+                        discount:
+                          nullable: true
+                        discountAbs:
+                          nullable: true
+                        currency:
+                          type: integer
+                        fxRate:
+                          type: integer
+                        logDateAdded:
+                          type: string
+                        invoice:
+                          type: object
+                          properties:
+                            uuid:
+                              type: string
+                        project:
+                          nullable: true
+                  totalWVat:
+                    type: number
+                  total:
+                    type: integer
+                  subtotal:
+                    type: integer
+                  uuid:
+                    type: string
+                  currency:
+                    type: integer
+                  sender:
+                    type: string
+                  key:
+                    type: string
+                  statusId:
+                    type: integer
+                  refNumberInt:
+                    type: integer
+                  langId:
+                    type: integer
+                  additionalInformation:
+                    type: string
+                  date:
+                    type: string
+                  dateDue:
+                    type: string
+                  logDateAdded:
+                    type: string
+                  vat:
+                    type: number
+                  vatIncluded:
+                    type: boolean
+                    nullable: true
+                  discount:
+                    type: number
+                    nullable: true
+                  discountAbs:
+                    type: number
+                    nullable: true
+                  paymentUrl:
+                    type: string
+                    nullable: true
+                  instance:
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
+                    required:
+                      - uuid
+                  address:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      street:
+                        type: string
+                      zip:
+                        type: string
+                      city:
+                        type: string
+                      company:
+                        type: object
+                        required:
+                          - uuid
+                        properties:
+                          uuid:
+                            type: string
+                          name:
+                            type: string
+                    required:
+                      - id
+                      - street
+                      - zip
+                      - city
+                      - company
+                  project:
+                    type: integer
+                    nullable: true
+                  paymentProfile:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      type:
+                        type: integer
+                      iban:
+                        type: string
+                      bankingReferenceNumber:
+                        type: string
+                      account:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          number:
+                            type: integer
+                          name:
+                            type: string
+                  productAccount:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      number:
+                        type: integer
+                  id:
+                    type: string
+                required:
+                  - totalWVat
+                  - total
+                  - subtotal
+                  - uuid
+                  - currency
+                  - key
+                  - statusId
+                  - refNumberInt
+                  - langId
+                  - date
       requestBody:
         $ref: '#/components/requestBodies/Uuid'
   /invoice/update:
@@ -1073,17 +1294,6 @@ components:
               - type
   parameters: {}
   responses:
-    Invoice:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              id:
-                type: string
-              amount:
-                type: number
     id:
       description: Return id of created object
       content:
