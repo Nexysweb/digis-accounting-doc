@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Admin as a Service (AaaS)
   version: '1.0'
-  description: This API connects to the accounting module of Digis. Provides all admin backend from incoming assets to accounting
+  description: This API connects to the modules of Digis.
   contact:
     name: Johan Boissard
     email: johan@nexys.ch
@@ -29,6 +29,7 @@ paths:
         name: date
         in: path
         required: true
+        description: placeholder
   /accounting/account/list:
     post:
       summary: Account list
@@ -78,6 +79,7 @@ paths:
         name: accountId
         in: path
         required: true
+        description: id of account
   '/accounting/entry/{accountId}/list':
     post:
       summary: Entry list for a selected account
@@ -152,6 +154,7 @@ paths:
         name: entryId
         in: path
         required: true
+        description: entry id
   /accounting/account/insert:
     post:
       tags:
@@ -188,12 +191,12 @@ paths:
         name: accountId
         in: path
         required: true
+        description: account id
   /company/list:
     post:
       description: fetches list of companies
       tags:
         - company
-        - accounting
       summary: get list of companies
       operationId: post-company-list
       responses:
@@ -333,8 +336,8 @@ paths:
 
         For now, only Switzerland is fully supported.
       tags:
-        - company
         - address
+        - company
       summary: Insert an Address
       operationId: insert-company-address
       responses:
@@ -1028,21 +1031,6 @@ components:
           refreshUrl: ''
           scopes: {}
   requestBodies:
-    Address:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              street:
-                type: string
-              city:
-                type: string
-              zip:
-                type: string
-              country:
-                type: string
-      description: ''
     Uuid:
       content:
         application/json:
@@ -1054,48 +1042,7 @@ components:
                 description: UUID
             required:
               - uuid
-      description: filter by UUID
-    Invoice:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              company:
-                type: object
-                required:
-                  - uuid
-                  - name
-                properties:
-                  uuid:
-                    type: string
-                  name:
-                    type: string
-              vat:
-                type: number
-              address:
-                type: object
-                properties:
-                  id:
-                    type: number
-                  body:
-                    type: object
-                    properties:
-                      street:
-                        type: string
-                      zip:
-                        type: string
-                      city:
-                        type: string
-                    required:
-                      - street
-                      - zip
-                      - city
-            required:
-              - company
-              - vat
-              - address
-      description: invoice insert
+      description: filter by UUID    
     Payment-Profile:
       content:
         application/json:
@@ -1173,14 +1120,23 @@ components:
               value:
                 uuid: 1521d11d-fd45-11ed-82d4-42010aac0013
 tags:
-  - name: user
-  - name: auth
   - name: accounting
-  - name: invoice
-  - name: file
-  - name: company
-  - name: payment profile
-  - name: mail
+    description: accounting endpoints
   - name: address
+    description: address endpoints
+  - name: auth
+    description: auth
+  - name: company
+    description: company endpoints
+  - name: file
+    description: file endpoints
+  - name: invoice
+    description: invoice endpoints
+  - name: mail
+    description: mail endpoints
+  - name: payment profile
+    description: payment profile endpoints
+  - name: user
+    description: user endpoints
 security:
   - Authorization: []
