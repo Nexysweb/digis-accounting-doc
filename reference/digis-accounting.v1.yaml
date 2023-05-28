@@ -319,7 +319,14 @@ paths:
         $ref: '#/components/requestBodies/Uuid'
   /address/insert:
     post:
-      description: insert company address
+      description: |-
+        insert an address. The address must be linked to a company.
+
+        Note that the ids of countries are the following:
+        1: Switzerland
+        (2: France)
+
+        For now, only Switzerland is fully supported.
       tags:
         - company
         - address
@@ -327,7 +334,7 @@ paths:
       operationId: insert-company-address
       responses:
         '200':
-          description: OK
+          $ref: '#/components/responses/id'
       x-internal: false
       requestBody:
         content:
@@ -1066,6 +1073,23 @@ components:
                 type: string
               amount:
                 type: number
+    id:
+      description: Return id of created object
+      content:
+        application/json:
+          schema:
+            properties:
+              id:
+                type: string
+        application/xml:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+            x-examples:
+              Example 1:
+                id: 449
 tags:
   - name: user
   - name: auth
