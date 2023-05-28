@@ -473,9 +473,27 @@ paths:
       operationId: post-invoice-insert
       responses:
         '200':
-          description: OK
+          $ref: '#/components/responses/Uuid'
       requestBody:
-        $ref: '#/components/requestBodies/Invoice'
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    address:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+              x-examples:
+                Example 1:
+                  data:
+                    address:
+                      id: 449
+        description: ''
   /invoice/item/list:
     post:
       summary: Invoice item list
@@ -532,6 +550,42 @@ paths:
         $ref: '#/components/requestBodies/Uuid'
       tags:
         - invoice
+  /invoice/pdf:
+    post:
+      summary: Invoice PDF
+      operationId: post-invoice-pdf
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+            application/pdf:
+              schema:
+                type: object
+                properties: {}
+        '201':
+          description: Created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uuid:
+                  type: string
+                lang:
+                  type: string
+                onlyReceipt:
+                  type: boolean
+              x-examples:
+                Example 1:
+                  uuid: 155cd780-fd45-11ed-82d4-42010aac0013
+                  lang: EN
+                  onlyReceipt: false
+      description: get PDF of selected invoice
   /payment-profile/list:
     post:
       summary: Payment Profile list
