@@ -224,7 +224,10 @@ paths:
                 - uuid
   /company/insert:
     post:
-      description: insert a company
+      description: |-
+        Insert a company/counterpart
+
+        Note that, for now, Digis does not differentiate between the different types of counterpart (company, physical person etc)
       tags:
         - company
       summary: Insert a company
@@ -303,17 +306,18 @@ paths:
               required:
                 - data
                 - uuid
-  /company/address/list:
+  /address/list:
     post:
       description: fetches list of address for a company
       tags:
         - company
-      summary: get list of companty addresses
+      summary: get list of addresses by company
       operationId: company-address-list
       responses:
         '200':
           description: OK
-  /company/address/detail:
+    parameters: []
+  /address/detail:
     post:
       description: list company address
       tags:
@@ -325,6 +329,7 @@ paths:
           description: OK
       requestBody:
         $ref: '#/components/requestBodies/Uuid'
+    parameters: []
   /address/insert:
     post:
       description: |-
@@ -336,7 +341,6 @@ paths:
 
         For now, only Switzerland is fully supported.
       tags:
-        - address
         - company
       summary: Insert an Address
       operationId: insert-company-address
@@ -383,7 +387,7 @@ paths:
         - Authorization: []
       parameters: []
     parameters: []
-  /company/address/update:
+  /address/update:
     post:
       description: update company address
       tags:
@@ -411,7 +415,8 @@ paths:
               required:
                 - data
                 - uuid
-  /company/address/delete:
+    parameters: []
+  /address/delete:
     post:
       description: delete company address
       tags:
@@ -423,6 +428,7 @@ paths:
           description: OK
       requestBody:
         $ref: '#/components/requestBodies/Uuid'
+    parameters: []
   /invoice/list:
     post:
       tags:
