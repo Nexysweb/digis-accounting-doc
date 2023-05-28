@@ -317,19 +317,54 @@ paths:
           description: OK
       requestBody:
         $ref: '#/components/requestBodies/Uuid'
-  /company/address/insert:
+  /address/insert:
     post:
       description: insert company address
       tags:
         - company
-      summary: insert company address
+        - address
+      summary: Insert an Address
       operationId: insert-company-address
       responses:
         '200':
           description: OK
       x-internal: false
       requestBody:
-        $ref: '#/components/requestBodies/Address'
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    street:
+                      type: string
+                    city:
+                      type: string
+                    zip:
+                      type: string
+                    country:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                    company:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+              x-examples:
+                Example 1:
+                  data:
+                    street: rue des cerises 23
+                    city: Montreux
+                    zip: '1234'
+                    country:
+                      id: 1
+                    company:
+                      uuid: 1521d11d-fd45-11ed-82d4-42010aac0013
+    parameters: []
   /company/address/update:
     post:
       description: update company address
@@ -1040,3 +1075,4 @@ tags:
   - name: company
   - name: payment profile
   - name: mail
+  - name: address
