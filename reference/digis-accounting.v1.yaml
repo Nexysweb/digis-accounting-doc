@@ -316,6 +316,56 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    street:
+                      type: string
+                    city:
+                      type: string
+                    zip:
+                      type: string
+                    country:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                x-examples:
+                  Example 1:
+                    - id: 311
+                      street: Route de Crassier 7
+                      city: Eysins
+                      zip: '1262'
+                      country:
+                        id: 1
+                        name: Switzerland
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  company:
+                    uuid: d39b7dd5-f747-11e8-a65d-fa163e41f33d
+              properties:
+                company:
+                  type: object
+                  required:
+                    - uuid
+                  properties:
+                    uuid:
+                      type: string
+              required:
+                - company
     parameters: []
   /address/detail:
     post:
@@ -1212,7 +1262,7 @@ paths:
         description: pass uuid and new status
       tags:
         - invoice
-      description: 'changes the status of an invoice'
+      description: changes the status of an invoice
       security:
         - Authorization: []
 components:
