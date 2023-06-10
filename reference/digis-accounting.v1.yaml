@@ -759,20 +759,51 @@ paths:
           application/json:
             schema:
               type: object
-              properties:
-                data:
-                  type: object
-                  properties:
-                    address:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
               x-examples:
                 Example 1:
                   data:
                     address:
                       id: 449
+              properties:
+                data:
+                  type: object
+                  required:
+                    - address
+                  properties:
+                    address:
+                      type: object
+                      required:
+                        - id
+                      properties:
+                        id:
+                          type: integer
+                    items:
+                      type: array
+                      x-stoplight:
+                        id: qjm26c7q8s761
+                      items:
+                        x-stoplight:
+                          id: d2atodbxtf0sj
+                        type: object
+                        properties:
+                          label:
+                            type: string
+                            x-stoplight:
+                              id: msov6lobfdnft
+                          quantity:
+                            type: number
+                            x-stoplight:
+                              id: 9ln3bxkovhyx5
+                          rate:
+                            type: number
+                            x-stoplight:
+                              id: ouh9nc8xvfthq
+                        required:
+                          - label
+                          - quantity
+                          - rate
+              required:
+                - data
         description: ''
   /invoice/item/list:
     post:
