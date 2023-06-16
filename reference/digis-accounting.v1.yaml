@@ -838,10 +838,6 @@ paths:
                       x-stoplight:
                         id: 3b4q4lsuaoeka
                       description: 'discount (absolute value [CHF]) applied to the whole invoice'
-                '':
-                  type: string
-                  x-stoplight:
-                    id: xj767j5ftsx9o
               required:
                 - data
         description: ''
