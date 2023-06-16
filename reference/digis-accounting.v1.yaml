@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Admin as a Service (AaaS)
-  version: v0.3.15
+  version: v0.3.16
   description: This API connects to the modules of Digis.
   contact:
     name: Johan Boissard
@@ -806,6 +806,10 @@ paths:
                             type: number
                             x-stoplight:
                               id: 82nx0l3hfmxcs
+                          '':
+                            type: string
+                            x-stoplight:
+                              id: doy90jw07eumm
                         required:
                           - label
                           - quantity
@@ -824,6 +828,16 @@ paths:
                       x-stoplight:
                         id: auoda3aywuncb
                       description: 'whether the vat is included or added (default: `false`)'
+                    discount:
+                      type: number
+                      x-stoplight:
+                        id: b9z7v3jr0rmnn
+                      description: 'discount [in %] applied to the whole invoice'
+                    discountAbs:
+                      type: number
+                      x-stoplight:
+                        id: 3b4q4lsuaoeka
+                      description: 'discount (absolute value [CHF]) applied to the whole invoice'
                 '':
                   type: string
                   x-stoplight:
