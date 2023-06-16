@@ -1322,6 +1322,36 @@ paths:
       description: changes the status of an invoice
       security:
         - Authorization: []
+  /meta/version:
+    get:
+      summary: get meta (version)
+      tags:
+        - meta
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    sha: 37c6700f83aea2be0e713c5c4f3b4110b8d54cea
+                    version: v0.3.15
+                    date: '2023-06-16T10:47:32.524Z'
+                properties:
+                  sha:
+                    type: string
+                  version:
+                    type: string
+                  date:
+                    type: string
+                required:
+                  - sha
+                  - version
+                  - date
+      operationId: get-meta-version
+      description: 'Meta data about the API: version, deployed date and sha'
 components:
   schemas:
     Account:
@@ -1526,5 +1556,7 @@ tags:
     description: payment profile endpoints
   - name: user
     description: user endpoints
+  - name: meta
+    description: meta endpoints
 security:
   - Authorization: []
