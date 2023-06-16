@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Admin as a Service (AaaS)
-  version: '1.0'
+  version: v0.3.15
   description: This API connects to the modules of Digis.
   contact:
     name: Johan Boissard
