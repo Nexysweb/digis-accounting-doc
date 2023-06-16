@@ -798,10 +798,36 @@ paths:
                             type: number
                             x-stoplight:
                               id: ouh9nc8xvfthq
+                          discount:
+                            type: number
+                            x-stoplight:
+                              id: ggyt9hyfhnypa
+                          discountAbs:
+                            type: number
+                            x-stoplight:
+                              id: 82nx0l3hfmxcs
                         required:
                           - label
                           - quantity
                           - rate
+                    vat:
+                      type: number
+                      x-stoplight:
+                        id: tdazu1mqpu413
+                    dueDate:
+                      type: string
+                      x-stoplight:
+                        id: mnkr1qltb57c0
+                      description: 'in iso format: 2023-06-30'
+                    vatIncluded:
+                      type: boolean
+                      x-stoplight:
+                        id: auoda3aywuncb
+                      description: 'whether the vat is included or added (default: `false`)'
+                '':
+                  type: string
+                  x-stoplight:
+                    id: xj767j5ftsx9o
               required:
                 - data
         description: ''
