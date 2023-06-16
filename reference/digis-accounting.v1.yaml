@@ -726,7 +726,7 @@ paths:
     post:
       tags:
         - invoice
-      summary: Update invoice
+      summary: Invoice update
       description: update invoice
       operationId: post-invoice-update
       responses:
